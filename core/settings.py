@@ -81,34 +81,23 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 LANGUAGE_CODE = 'en-us'
-TIME_ZONE = 'Africa/Nairobi'  # Changed to Kenya time
+TIME_ZONE = 'Africa/Nairobi'
 USE_I18N = True
 USE_TZ = True
-
-# Static files (CSS, JavaScript, Images)
-STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
-# Default primary key field type
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-# ========== ROYAL HOPE CONTACT CONFIGURATION ==========
-# Email is saved in database but NO emails are sent
-# All communication is via WhatsApp only
-ROYAL_HOPE_PHONE = '+254740940395'  # Your WhatsApp number
-
-# Email configuration - DISABLED (using dummy backend)
-# Emails will be saved to database but not sent
-EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
-
-# Keep these for database storage only (not used for sending)
-EMAIL_HOST_USER = 'timblax0@gmail.com'
-DEFAULT_FROM_EMAIL = 'RoyalHope Care <noreply@royalhope.co.ke>'
 
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_DIRS = [BASE_DIR / 'consultations' / 'static']
 
-# Notification settings
-ADMIN_EMAILS = ['timblax0@gmail.com']  # For reference only, no emails sent
+# Default primary key field type
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# ========== ROYAL HOPE CONTACT CONFIGURATION ==========
+ROYAL_HOPE_PHONE = '+254740940395'
+
+# Email configuration - DISABLED (using dummy backend)
+EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
+EMAIL_HOST_USER = 'timblax0@gmail.com'
+DEFAULT_FROM_EMAIL = 'RoyalHope Care <noreply@royalhope.co.ke>'
+ADMIN_EMAILS = ['timblax0@gmail.com']
