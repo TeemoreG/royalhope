@@ -159,7 +159,7 @@ Reply to this patient via WhatsApp"""
         # Updated to new WhatsApp number
         whatsapp_url = f"https://wa.me/254791597351?text={quote(message)}"
         
-        del request.session['lead_id']
+        # REMOVED: del request.session['lead_id']  ← FIXED! Session no longer deleted
         
         print(f"\n{'='*60}")
         print(f"WHATSAPP LINK:")
