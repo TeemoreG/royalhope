@@ -12,7 +12,6 @@ def send_whatsapp_notification_to_admin(lead, consultation):
     """Send WhatsApp notification to Royal Hope team (254791597351)"""
     your_phone = '254791597351'
     
-    # Prepare clean WhatsApp message with NO symbols
     whatsapp_msg = f"""ROYALHOPE NEW PATIENT
 
 PATIENT: {lead.name}
@@ -140,7 +139,6 @@ def screening(request):
             status='pending',
         )
         
-        # Create clean WhatsApp message for Dr. Solomon - NEW NUMBER
         message = f"""NEW PATIENT - RoyalHope
 
 Name: {lead.name}
@@ -156,10 +154,7 @@ Conditions: {conditions or 'None'}
 
 Reply to this patient via WhatsApp"""
         
-        # Updated to new WhatsApp number
         whatsapp_url = f"https://wa.me/254791597351?text={quote(message)}"
-        
-        # REMOVED: del request.session['lead_id']  ← FIXED! Session no longer deleted
         
         print(f"\n{'='*60}")
         print(f"WHATSAPP LINK:")
