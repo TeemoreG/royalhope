@@ -9,8 +9,8 @@ from urllib.parse import quote
 # ========== WHATSAPP NOTIFICATION FUNCTIONS ==========
 
 def send_whatsapp_notification_to_admin(lead, consultation):
-    """Send WhatsApp notification to Royal Hope team (0740940395)"""
-    your_phone = '254740940395'
+    """Send WhatsApp notification to Royal Hope team (254791597351)"""
+    your_phone = '254791597351'
     
     # Prepare clean WhatsApp message with NO symbols
     whatsapp_msg = f"""ROYALHOPE NEW PATIENT
@@ -48,7 +48,7 @@ Thank you {lead.name}! Your consultation has been received.
 
 Dr. Solomon will review your health screening and respond shortly.
 
-Emergency: +254 740 940 395
+Emergency: +254 791 597 351
 
 Stay healthy"""
     
@@ -72,7 +72,7 @@ Your symptoms: {consultation.symptoms}
 Doctor's response:
 {response_text}
 
-Need more help? Call us: +254 740 940 395
+Need more help? Call us: +254 791 597 351
 
 Stay healthy"""
     
@@ -140,7 +140,7 @@ def screening(request):
             status='pending',
         )
         
-        # Create clean WhatsApp message for Dr. Solomon - NO SYMBOLS
+        # Create clean WhatsApp message for Dr. Solomon - NEW NUMBER
         message = f"""NEW PATIENT - RoyalHope
 
 Name: {lead.name}
@@ -156,7 +156,8 @@ Conditions: {conditions or 'None'}
 
 Reply to this patient via WhatsApp"""
         
-        whatsapp_url = f"https://wa.me/254740940395?text={quote(message)}"
+        # Updated to new WhatsApp number
+        whatsapp_url = f"https://wa.me/254791597351?text={quote(message)}"
         
         del request.session['lead_id']
         
