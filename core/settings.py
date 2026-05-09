@@ -105,5 +105,10 @@ EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
 EMAIL_HOST_USER = 'timblax0@gmail.com'
 DEFAULT_FROM_EMAIL = 'RoyalHope Care <noreply@royalhope.co.ke>'
 
+# Static files (CSS, JavaScript, Images)
+STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATICFILES_DIRS = [BASE_DIR / 'consultations' / 'static']
+
 # Notification settings
 ADMIN_EMAILS = ['timblax0@gmail.com']  # For reference only, no emails sent
