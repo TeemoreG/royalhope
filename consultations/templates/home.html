@@ -1,0 +1,284 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Free Health Screening · RoyalHope Home Based Care</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Sora:wght@700;800&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --pink:#e91e8c;--pink-d:#c0166f;--pink-lt:#fce4f3;--pink-mid:#f472b6;
+  --navy:#0d2251;--blue:#1a56a0;--sky:#3b82f6;--teal:#0ea5e9;
+  --fog:#f7f9fd;--white:#fff;--border:#dde5f5;--muted:#6b7fa3;--ink:#0f1b30;
+  --r:14px;--r-sm:9px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Plus Jakarta Sans',sans-serif;min-height:100vh;background:var(--navy);display:flex;flex-direction:column;color:var(--ink)}
+
+/* HERO */
+.hero{background:var(--navy);position:relative;overflow:hidden;padding:54px 20px 100px;text-align:center}
+.hero::before{content:'';position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse 60% 50% at 20% 80%,rgba(233,30,140,.22) 0%,transparent 60%),
+             radial-gradient(ellipse 50% 60% at 80% 20%,rgba(59,130,246,.18) 0%,transparent 60%)}
+.hero::after{content:'';position:absolute;inset:0;pointer-events:none;
+  background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+  background-size:48px 48px}
+.hero-inner{position:relative;z-index:1;max-width:560px;margin:0 auto}
+
+.brand{display:flex;align-items:center;justify-content:center;gap:11px;margin-bottom:22px}
+.brand-logo{
+  width:54px;height:54px;border-radius:13px;
+  background:rgba(255,255,255,.08);
+  border:1.5px solid rgba(255,255,255,.18);
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;flex-shrink:0;
+}
+.brand-logo img{width:100%;height:100%;object-fit:contain;display:block}
+.brand-name{font-size:13px;font-weight:700;color:rgba(255,255,255,.9);letter-spacing:.03em;text-align:left}
+.brand-sub{font-size:11px;color:rgba(255,255,255,.35);margin-top:1px}
+
+.badge{display:inline-flex;align-items:center;gap:7px;
+  background:rgba(233,30,140,.15);border:1px solid rgba(233,30,140,.35);
+  color:#f9a8d4;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  padding:5px 14px;border-radius:100px;margin-bottom:20px}
+.badge .dot{width:6px;height:6px;border-radius:50%;background:var(--pink);
+  animation:blink 1.8s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
+
+.hero h1{font-family:'Sora',sans-serif;font-size:clamp(28px,6vw,46px);font-weight:800;
+  color:#fff;line-height:1.08;letter-spacing:-.03em;margin-bottom:14px}
+.hero h1 .pk{color:var(--pink-mid)}
+.hero-sub{font-size:clamp(13px,3vw,15px);color:rgba(255,255,255,.48);line-height:1.65;
+  max-width:420px;margin:0 auto 30px}
+
+.stats{display:flex;justify-content:center;align-items:center;gap:0;flex-wrap:wrap}
+.stat{text-align:center;padding:0 18px}
+.stat-num{font-size:22px;font-weight:800;color:#fff;letter-spacing:-.02em}
+.stat-lbl{font-size:10px;color:rgba(255,255,255,.32);font-weight:600;text-transform:uppercase;letter-spacing:.08em;margin-top:2px}
+.stat-sep{width:1px;height:34px;background:rgba(255,255,255,.1)}
+
+/* CARD */
+.card-wrap{flex:1;display:flex;justify-content:center;padding:0 16px 56px;margin-top:-56px;position:relative;z-index:10}
+.card-outer{width:100%;max-width:500px}
+.card{background:#fff;border-radius:20px;box-shadow:0 24px 64px rgba(0,0,0,.28);overflow:hidden}
+
+.card-head{background:var(--fog);border-bottom:1px solid var(--border);padding:18px 26px;
+  display:flex;align-items:center;justify-content:space-between}
+.card-head h3{font-size:15px;font-weight:700;color:var(--navy)}
+.card-head p{font-size:12px;color:var(--muted);margin-top:2px}
+.free-pill{background:var(--pink);color:#fff;font-size:11px;font-weight:800;
+  letter-spacing:.08em;text-transform:uppercase;padding:5px 13px;border-radius:100px}
+
+.prog{height:3px;background:var(--fog)}
+.prog-fill{height:100%;width:33%;background:linear-gradient(90deg,var(--pink),var(--sky))}
+
+.form-body{padding:26px 26px 22px}
+
+.f{display:flex;flex-direction:column;gap:5px;margin-bottom:15px}
+.f label{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--navy)}
+.f label .req{color:var(--pink);margin-left:1px}
+.f label .opt{font-weight:400;color:var(--muted);text-transform:none;letter-spacing:0;font-size:10px;margin-left:3px}
+.f input,.f select{
+  padding:11px 14px;border:1.5px solid var(--border);border-radius:var(--r-sm);
+  font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:500;
+  color:var(--ink);background:var(--fog);outline:none;-webkit-appearance:none;
+  transition:border-color .15s,background .15s,box-shadow .15s;width:100%}
+.f input::placeholder{color:#b8c5de;font-weight:400}
+.f input:focus,.f select:focus{border-color:var(--pink);background:#fff;box-shadow:0 0 0 3px rgba(233,30,140,.1)}
+.f select{cursor:pointer}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+
+.err{display:none;font-size:11.5px;color:#dc2626;font-weight:600;margin-top:3px}
+
+/* consent */
+.consent{background:var(--fog);border:1.5px solid var(--border);border-radius:var(--r-sm);
+  padding:12px 14px;display:flex;gap:11px;align-items:flex-start;cursor:pointer;
+  transition:border-color .15s;margin-bottom:18px}
+.consent:hover{border-color:var(--pink)}
+.consent input{width:16px;height:16px;accent-color:var(--pink);cursor:pointer;flex-shrink:0;margin-top:2px}
+.consent span{font-size:12.5px;color:var(--muted);line-height:1.5}
+.consent a{color:var(--pink);text-decoration:none;font-weight:700}
+
+.btn-submit{width:100%;padding:14px;
+  background:linear-gradient(135deg,var(--pink) 0%,var(--pink-d) 100%);
+  color:#fff;border:none;border-radius:var(--r-sm);
+  font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:700;
+  cursor:pointer;letter-spacing:.01em;
+  box-shadow:0 6px 20px rgba(233,30,140,.3);transition:opacity .15s,transform .12s}
+.btn-submit:hover{opacity:.9;transform:translateY(-1px)}
+.btn-submit:active{transform:translateY(0)}
+
+.card-foot{background:var(--fog);border-top:1px solid var(--border);padding:13px 26px;
+  display:flex;align-items:center;justify-content:center;gap:7px}
+.card-foot svg{width:13px;height:13px;fill:var(--muted);flex-shrink:0}
+.card-foot span{font-size:11.5px;color:var(--muted);text-align:center}
+
+/* partner */
+.partner-strip{max-width:500px;margin:14px auto 0;
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:var(--r);
+  padding:14px 16px;text-align:center}
+.partner-lbl{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:rgba(255,255,255,.28);margin-bottom:9px}
+.partner-logos{display:flex;flex-wrap:wrap;justify-content:center;gap:6px}
+.pp{font-size:11px;color:rgba(255,255,255,.45);font-weight:600;
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);
+  border-radius:100px;padding:3px 11px}
+
+.trust-strip{max-width:500px;margin:12px auto 0;display:flex;justify-content:center;
+  gap:18px;flex-wrap:wrap;padding:0 16px}
+.trust-item{display:flex;align-items:center;gap:5px;font-size:11.5px;color:rgba(255,255,255,.3);font-weight:500}
+.tdot{width:5px;height:5px;border-radius:50%;background:var(--pink)}
+
+@media(max-width:500px){
+  .hero{padding:42px 16px 86px}
+  .card-head,.form-body{padding-left:18px;padding-right:18px}
+  .row2{grid-template-columns:1fr}
+  .stats{gap:0}
+  .stat{padding:0 12px}
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="brand">
+      <div class="brand-logo">
+        <img src="{% static 'logo.png' %}" alt="RoyalHope Logo"/>
+      </div>
+      <div>
+        <div class="brand-name">RoyalHope Home Based Care</div>
+        <div class="brand-sub">Professional Care at the Comfort of Home</div>
+      </div>
+    </div>
+    <div class="badge"><div class="dot"></div>48-Hour Campaign · Limited Slots</div>
+    <h1>Free Health Screening<br/><span class="pk">Registration</span></h1>
+    <p class="hero-sub">Our team of experienced doctors will provide free consultations as part of our campaign to help people with awareness and healthy living. Starting tomorrow — don't miss out!</p>
+    <div class="stats">
+      <div class="stat"><div class="stat-num">500+</div><div class="stat-lbl">Registered</div></div>
+      <div class="stat-sep"></div>
+      <div class="stat"><div class="stat-num">18+</div><div class="stat-lbl">Hospitals</div></div>
+      <div class="stat-sep"></div>
+      <div class="stat"><div class="stat-num">48hr</div><div class="stat-lbl">Campaign</div></div>
+      <div class="stat-sep"></div>
+      <div class="stat"><div class="stat-num">98%</div><div class="stat-lbl">Satisfaction</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="card-wrap">
+  <div class="card-outer">
+    <div class="card">
+      <div class="card-head">
+        <div>
+          <h3>Health Screening Registration</h3>
+          <p>RoyalHope Home Based Care · Campaign 2026</p>
+        </div>
+        <div class="free-pill">FREE</div>
+      </div>
+      <div class="prog"><div class="prog-fill"></div></div>
+
+      <div class="form-body">
+        <form method="POST" id="leadForm" novalidate>
+          {% csrf_token %}
+
+          <div class="f">
+            <label>Full Name <span class="req">*</span></label>
+            <input type="text" name="full_name" id="full_name" placeholder="e.g. Amina Wanjiku" autocomplete="name"/>
+            <span class="err" id="fn-e">Please enter your full name</span>
+          </div>
+
+          <div class="row2">
+            <div class="f">
+              <label>Phone Number <span class="req">*</span></label>
+              <input type="tel" name="phone" id="phone" placeholder="+254 7XX XXX XXX" inputmode="tel"/>
+              <span class="err" id="ph-e">Please enter your phone number</span>
+            </div>
+            <div class="f">
+              <label>Email <span class="opt">optional</span></label>
+              <input type="email" name="email" id="email" placeholder="you@example.com"/>
+            </div>
+          </div>
+
+          <div class="row2">
+            <div class="f">
+              <label>County / Location <span class="req">*</span></label>
+              <select name="county" id="county">
+                <option value="" disabled selected>Where are you based?</option>
+                <option>Nairobi CBD</option>
+                <option>Westlands &amp; Parklands</option>
+                <option>Karen &amp; Langata</option>
+                <option>East Nairobi</option>
+                <option>Kiambu County</option>
+                <option>Other</option>
+              </select>
+              <span class="err" id="cn-e">Please select your location</span>
+            </div>
+            <div class="f">
+              <label>Gender <span class="req">*</span></label>
+              <select name="gender" id="gender">
+                <option value="" disabled selected>Select</option>
+                <option>Female</option>
+                <option>Male</option>
+                <option>Prefer not to say</option>
+              </select>
+              <span class="err" id="gn-e">Please select your gender</span>
+            </div>
+          </div>
+
+          <label class="consent">
+            <input type="checkbox" name="consent" id="consent_check"/>
+            <span>I agree to receive health updates and wellness tips from RoyalHope Home Based Care. <a href="#">Privacy policy</a></span>
+          </label>
+
+          <button type="submit" class="btn-submit">Register for Free Screening &rarr;</button>
+        </form>
+      </div>
+
+      <div class="card-foot">
+        <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
+        <span>Encrypted &amp; confidential — your data is never shared without consent</span>
+      </div>
+    </div>
+
+    <div class="partner-strip">
+      <div class="partner-lbl">In partnership with leading hospitals across Kenya</div>
+      <div class="partner-logos">
+        <span class="pp">Kenyatta National Hospital</span>
+        <span class="pp">Aga Khan University Hospital</span>
+        <span class="pp">Nairobi Hospital</span>
+        <span class="pp">MP Shah Hospital</span>
+        <span class="pp">Mombasa General Hospital</span>
+        <span class="pp">Kijabe Hospital</span>
+      </div>
+    </div>
+
+    <div class="trust-strip">
+      <div class="trust-item"><div class="tdot"></div>100% Free</div>
+      <div class="trust-item"><div class="tdot"></div>No Diagnosis</div>
+      <div class="trust-item"><div class="tdot"></div>Certified Staff</div>
+      <div class="trust-item"><div class="tdot"></div>Confidential</div>
+      <div class="trust-item"><div class="tdot"></div>Home Visits</div>
+    </div>
+  </div>
+</div>
+
+<script>
+function showE(id,show){var e=document.getElementById(id);if(e)e.style.display=show?'block':'none'}
+document.getElementById('leadForm').addEventListener('submit',function(ev){
+  var fn=document.getElementById('full_name').value.trim();
+  var ph=document.getElementById('phone').value.trim();
+  var cn=document.getElementById('county').value;
+  var gn=document.getElementById('gender').value;
+  var ok=true;
+  showE('fn-e',!fn);if(!fn)ok=false;
+  showE('ph-e',!ph);if(!ph)ok=false;
+  showE('cn-e',!cn);if(!cn)ok=false;
+  showE('gn-e',!gn);if(!gn)ok=false;
+  if(!ok)ev.preventDefault();
+});
+</script>
+</body>
+</html>

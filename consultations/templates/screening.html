@@ -1,0 +1,333 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Health Screening Form · RoyalHope Home Based Care</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Sora:wght@700;800&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --pink:#e91e8c;--pink-d:#c0166f;--pink-lt:#fce4f3;--pink-mid:#f472b6;
+  --navy:#0d2251;--blue:#1a56a0;--sky:#3b82f6;--teal:#0ea5e9;
+  --fog:#f7f9fd;--white:#fff;--border:#dde5f5;--muted:#6b7fa3;--ink:#0f1b30;
+  --r:12px;--r-sm:9px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--fog);min-height:100vh;color:var(--ink)}
+
+/* PAGE GRID */
+.page{min-height:100vh;display:grid;grid-template-columns:360px 1fr}
+
+/* LEFT PANEL */
+.left{background:var(--navy);padding:44px 32px;display:flex;flex-direction:column;position:relative;overflow:hidden}
+.left::before{content:'';position:absolute;bottom:-100px;right:-100px;width:360px;height:360px;
+  border-radius:50%;border:1px solid rgba(59,130,246,.14);pointer-events:none}
+.left::after{content:'';position:absolute;bottom:-30px;right:-30px;width:200px;height:200px;
+  border-radius:50%;border:1px solid rgba(59,130,246,.09);pointer-events:none}
+.glow{position:absolute;bottom:40px;right:-60px;width:280px;height:280px;border-radius:50%;
+  background:radial-gradient(circle,rgba(233,30,140,.2) 0%,transparent 65%);pointer-events:none}
+
+/* Brand */
+.brand{display:flex;align-items:center;gap:11px;margin-bottom:44px}
+.brand-logo{
+  width:48px;height:48px;border-radius:11px;
+  background:rgba(255,255,255,.08);
+  border:1.5px solid rgba(255,255,255,.16);
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;flex-shrink:0;
+}
+.brand-logo img{width:100%;height:100%;object-fit:contain;display:block}
+.brand-name{font-size:13.5px;font-weight:700;color:rgba(255,255,255,.92);letter-spacing:.02em}
+.brand-sub{font-size:11px;color:rgba(255,255,255,.35);margin-top:2px}
+
+/* Steps */
+.steps{display:flex;flex-direction:column;gap:0;flex:1}
+.step-item{display:flex;gap:15px;padding-bottom:26px;position:relative}
+.step-item:not(:last-child)::before{content:'';position:absolute;left:14px;top:30px;
+  width:1px;height:calc(100% - 14px);background:rgba(255,255,255,.08)}
+.step-num{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:11px;font-weight:700;flex-shrink:0}
+.step-num.done{background:var(--pink);color:#fff}
+.step-num.active{background:rgba(255,255,255,.1);border:2px solid var(--pink);color:#fff}
+.step-num.todo{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.25)}
+.step-title{font-size:13px;font-weight:600;color:rgba(255,255,255,.7);margin-top:4px}
+.step-title.active{color:#fff}
+.step-title.todo{color:rgba(255,255,255,.28)}
+.step-desc{font-size:11.5px;color:rgba(255,255,255,.32);margin-top:3px}
+
+/* Info cards */
+.info-cards{margin-top:36px;display:flex;flex-direction:column;gap:9px}
+.info-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);
+  border-radius:var(--r);padding:11px 13px;display:flex;align-items:center;gap:11px}
+.info-icon{width:32px;height:32px;border-radius:8px;background:rgba(233,30,140,.18);
+  border:1px solid rgba(233,30,140,.25);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.info-text{font-size:12px;color:rgba(255,255,255,.5);line-height:1.4}
+.info-text strong{display:block;color:rgba(255,255,255,.78);font-weight:600;font-size:12px;margin-bottom:1px}
+
+.left-footer{margin-top:28px;font-size:10px;color:rgba(255,255,255,.16)}
+
+/* RIGHT PANEL */
+.right{background:#fff;padding:44px 48px;display:flex;flex-direction:column}
+
+.form-top{margin-bottom:28px}
+.form-tag{display:inline-flex;align-items:center;gap:6px;
+  background:var(--pink-lt);color:var(--pink);border:1px solid rgba(233,30,140,.2);
+  font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  padding:5px 12px;border-radius:100px;margin-bottom:14px}
+.form-tag .dot{width:6px;height:6px;border-radius:50%;background:var(--pink)}
+.form-top h2{font-family:'Sora',sans-serif;font-size:24px;font-weight:800;
+  color:var(--navy);letter-spacing:-.02em;line-height:1.15;margin-bottom:7px}
+.form-top p{font-size:14px;color:var(--muted)}
+
+.prog-track{height:4px;background:var(--fog);border-radius:4px;margin-bottom:28px;overflow:hidden}
+.prog-fill{height:100%;width:100%;background:linear-gradient(90deg,var(--pink),var(--sky));border-radius:4px}
+
+/* FORM */
+.f{display:flex;flex-direction:column;gap:5px;margin-bottom:16px}
+.f label{font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--navy)}
+.f label .req{color:var(--pink);margin-left:1px}
+.f label .opt{font-weight:400;color:var(--muted);text-transform:none;letter-spacing:0;font-size:10px;margin-left:3px}
+.f input,.f select,.f textarea{
+  padding:12px 14px;border:1.5px solid var(--border);border-radius:var(--r-sm);
+  font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:500;
+  color:var(--ink);background:var(--fog);outline:none;-webkit-appearance:none;
+  transition:border-color .15s,background .15s,box-shadow .15s;width:100%}
+.f input::placeholder,.f textarea::placeholder{color:#b8c5de;font-weight:400}
+.f input:focus,.f select:focus,.f textarea:focus{
+  border-color:var(--pink);background:#fff;box-shadow:0 0 0 3px rgba(233,30,140,.1)}
+.f select{cursor:pointer}
+.f textarea{resize:none;height:82px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+
+.err{display:none;font-size:11.5px;color:#dc2626;font-weight:600;margin-top:3px}
+
+/* CHIPS */
+.chip-wrap{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:4px}
+.chip{position:relative}
+.chip input{position:absolute;opacity:0;width:0;height:0}
+.chip label{display:inline-flex;align-items:center;gap:5px;
+  border:1.5px solid var(--border);border-radius:100px;padding:7px 13px;
+  font-size:12.5px;font-weight:600;color:var(--muted);cursor:pointer;
+  background:var(--fog);transition:all .15s;white-space:nowrap}
+.chip input:checked+label{border-color:var(--pink);background:var(--pink-lt);color:var(--navy)}
+.chip label:hover{border-color:var(--pink-mid)}
+.chip label::before{content:'';width:8px;height:8px;border-radius:50%;
+  border:1.5px solid var(--border);flex-shrink:0;transition:all .15s}
+.chip input:checked+label::before{background:var(--pink);border-color:var(--pink)}
+
+/* Buttons */
+.btn-row{margin-top:6px;display:flex;flex-direction:column;gap:10px}
+.btn-main{width:100%;padding:14px;
+  background:linear-gradient(135deg,var(--pink) 0%,var(--pink-d) 100%);
+  color:#fff;border:none;border-radius:var(--r-sm);
+  font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:700;cursor:pointer;
+  box-shadow:0 6px 20px rgba(233,30,140,.28);transition:opacity .15s,transform .12s}
+.btn-main:hover{opacity:.9;transform:translateY(-1px)}
+.btn-main:active{transform:translateY(0)}
+
+.secure-note{display:flex;align-items:center;justify-content:center;gap:6px;
+  font-size:11.5px;color:var(--muted);margin-top:10px}
+.secure-note svg{width:12px;height:12px;fill:var(--muted)}
+
+/* RESPONSIVE */
+@media(max-width:880px){
+  .page{grid-template-columns:1fr}
+  .left{padding:24px 20px 28px}
+  .steps{flex-direction:row;overflow-x:auto;gap:0}
+  .step-item{flex-direction:column;align-items:center;text-align:center;flex:1;padding-bottom:0;min-width:70px}
+  .step-item:not(:last-child)::before{left:50%;top:14px;width:calc(100% - 14px);height:1px;transform:translateX(14px)}
+  .step-desc{display:none}
+  .info-cards{flex-direction:row;flex-wrap:wrap}
+  .info-card{flex:1;min-width:130px}
+  .right{padding:28px 20px 36px}
+}
+@media(max-width:520px){
+  .row2{grid-template-columns:1fr}
+  .info-cards{display:none}
+  .right{padding:24px 14px 32px}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- LEFT PANEL -->
+  <div class="left">
+    <div class="glow"></div>
+
+    <div class="brand">
+      <div class="brand-logo">
+        <img src="{% static 'logo.png' %}" alt="RoyalHope Logo"/>
+      </div>
+      <div>
+        <div class="brand-name">RoyalHope Home Based Care</div>
+        <div class="brand-sub">Health Campaign 2026</div>
+      </div>
+    </div>
+
+    <div class="steps">
+      <div class="step-item">
+        <div class="step-num done">✓</div>
+        <div>
+          <div class="step-title">Personal Info</div>
+          <div class="step-desc">Name &amp; contact details</div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num active">2</div>
+        <div>
+          <div class="step-title active">Health Screening</div>
+          <div class="step-desc">Your medical background</div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num todo">3</div>
+        <div>
+          <div class="step-title todo">WhatsApp</div>
+          <div class="step-desc">Direct to Dr. Solomon</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-cards">
+      <div class="info-card">
+        <div class="info-icon">🔒</div>
+        <div class="info-text"><strong>Confidential</strong>Encrypted &amp; never shared</div>
+      </div>
+      <div class="info-card">
+        <div class="info-icon">🏥</div>
+        <div class="info-text"><strong>18+ Hospital Partners</strong>Leading hospitals across Kenya</div>
+      </div>
+      <div class="info-card">
+        <div class="info-icon">⏰</div>
+        <div class="info-text"><strong>48-Hour Campaign</strong>Limited slots — register now</div>
+      </div>
+      <div class="info-card">
+        <div class="info-icon">🏠</div>
+        <div class="info-text"><strong>Home Visits Available</strong>Nairobi &amp; Kiambu County</div>
+      </div>
+      <div class="info-card">
+        <div class="info-icon">📱</div>
+        <div class="info-text"><strong>WhatsApp Only</strong>Direct message to Dr. Solomon</div>
+      </div>
+    </div>
+
+    <div class="left-footer">© 2026 RoyalHope Home Based Care · Campaign 2026 · Confidential<br/>Solomon — 0740 940 395</div>
+  </div>
+
+  <!-- RIGHT PANEL -->
+  <div class="right">
+    <div class="form-top">
+      <div class="form-tag"><div class="dot"></div>Final Step</div>
+      <h2>Health Screening Form</h2>
+      <p>Complete your health background. Dr. Solomon will respond via WhatsApp.</p>
+    </div>
+
+    <div class="prog-track"><div class="prog-fill"></div></div>
+
+    <form method="POST" id="screeningForm" action="{% url 'screening' %}" novalidate>
+      {% csrf_token %}
+
+      <!-- Symptoms -->
+      <div class="f">
+        <label>What symptoms are you experiencing? <span class="req">*</span></label>
+        <textarea name="symptoms" id="symptoms" rows="3" placeholder="Describe your symptoms in detail... e.g., fever, headache, fatigue, cough" required></textarea>
+        <span class="err" id="sx-e">Please describe your symptoms</span>
+      </div>
+
+      <!-- Duration + Age Range -->
+      <div class="row2">
+        <div class="f">
+          <label>How long have you had these symptoms? <span class="req">*</span></label>
+          <input type="text" name="duration" id="duration" placeholder="e.g., 3 days, 2 weeks, 6 months" required>
+          <span class="err" id="dur-e">Please specify duration</span>
+        </div>
+
+        <div class="f">
+          <label>Age range <span class="req">*</span></label>
+          <select name="age_range" id="age_range" required>
+            <option value="" disabled selected>Select age range</option>
+            <option value="0-12">Child (0-12 years)</option>
+            <option value="13-19">Teen (13-19 years)</option>
+            <option value="20-35">Young Adult (20-35 years)</option>
+            <option value="36-50">Adult (36-50 years)</option>
+            <option value="51+">Senior (51+ years)</option>
+          </select>
+          <span class="err" id="age-e">Please select age range</span>
+        </div>
+      </div>
+
+      <!-- Conditions -->
+      <div class="f">
+        <label>Pre-existing conditions <span class="opt">select all that apply</span></label>
+        <div class="chip-wrap">
+          <div class="chip"><input type="checkbox" name="conditions" id="dc1" value="Diabetes"><label for="dc1">Diabetes</label></div>
+          <div class="chip"><input type="checkbox" name="conditions" id="dc2" value="Hypertension"><label for="dc2">Hypertension</label></div>
+          <div class="chip"><input type="checkbox" name="conditions" id="dc3" value="Heart Disease"><label for="dc3">Heart Disease</label></div>
+          <div class="chip"><input type="checkbox" name="conditions" id="dc4" value="Kidney Disease"><label for="dc4">Kidney Disease</label></div>
+          <div class="chip"><input type="checkbox" name="conditions" id="dc5" value="Asthma"><label for="dc5">Asthma</label></div>
+          <div class="chip"><input type="checkbox" name="conditions" id="dc6" value="Arthritis"><label for="dc6">Arthritis</label></div>
+          <div class="chip"><input type="checkbox" name="conditions" id="dc7" value="Cancer"><label for="dc7">Cancer</label></div>
+          <div class="chip"><input type="checkbox" name="conditions" id="dc8" value="Stroke"><label for="dc8">Stroke</label></div>
+          <div class="chip"><input type="checkbox" name="conditions" id="dc9" value="Dementia"><label for="dc9">Dementia</label></div>
+          <div class="chip"><input type="checkbox" name="conditions" id="dc10" value="None"><label for="dc10">None of the above</label></div>
+        </div>
+        <input type="hidden" name="conditions_combined" id="conditions_combined">
+      </div>
+
+      <div class="btn-row">
+        <button type="submit" class="btn-main">📱 Send to WhatsApp →</button>
+        <div class="secure-note">
+          <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
+          Your information is encrypted. You'll go directly to WhatsApp.
+        </div>
+      </div>
+    </form>
+  </div>
+
+</div>
+
+<script>
+function showE(id, show) {
+  var e = document.getElementById(id);
+  if(e) e.style.display = show ? 'block' : 'none';
+}
+
+document.getElementById('screeningForm').addEventListener('submit', function(ev) {
+  var symptoms = document.getElementById('symptoms').value.trim();
+  var duration = document.getElementById('duration').value.trim();
+  var age_range = document.getElementById('age_range').value;
+  
+  var ok = true;
+  
+  showE('sx-e', !symptoms);
+  showE('dur-e', !duration);
+  showE('age-e', !age_range);
+  
+  if(!symptoms || !duration || !age_range) {
+    ok = false;
+  }
+  
+  // Combine conditions
+  var conditions = [];
+  document.querySelectorAll('input[name="conditions"]:checked').forEach(function(cb) {
+    if(cb.value !== 'None') {
+      conditions.push(cb.value);
+    }
+  });
+  
+  var noneChecked = document.querySelector('input[name="conditions"][value="None"]:checked');
+  if(conditions.length === 0 || noneChecked) {
+    document.getElementById('conditions_combined').value = 'None';
+  } else {
+    document.getElementById('conditions_combined').value = conditions.join(', ');
+  }
+  
+  if(!ok) {
+    ev.preventDefault();
+  }
+});
+</script>
+</body>
+</html>

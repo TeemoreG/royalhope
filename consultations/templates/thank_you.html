@@ -1,0 +1,501 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Thank You · RoyalHope Home Based Care</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Sora:wght@700;800&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --pink:#e91e8c;--pink-d:#c0166f;--pink-lt:#fce4f3;--pink-mid:#f472b6;
+  --navy:#0d2251;--blue:#1a56a0;--sky:#3b82f6;--teal:#0ea5e9;
+  --fog:#f7f9fd;--white:#fff;--border:#dde5f5;--muted:#6b7fa3;--ink:#0f1b30;
+  --r:20px;--r-sm:12px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:'Plus Jakarta Sans',sans-serif;
+  min-height:100vh;
+  background:var(--navy);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+
+/* Card Container */
+.card{
+  max-width:560px;
+  width:100%;
+  background:var(--white);
+  border-radius:var(--r);
+  overflow:hidden;
+  box-shadow:0 32px 64px rgba(0,0,0,.25);
+  animation:fadeInUp 0.5s ease-out;
+}
+
+@keyframes fadeInUp{
+  from{
+    opacity:0;
+    transform:translateY(30px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+/* Header with logo */
+.header{
+  background:var(--navy);
+  padding:28px 32px;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+}
+.header::before{
+  content:'';
+  position:absolute;
+  bottom:-80px;
+  right:-80px;
+  width:200px;
+  height:200px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(233,30,140,.15) 0%,transparent 70%);
+  pointer-events:none;
+}
+.brand{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  margin-bottom:16px;
+}
+.brand-logo{
+  width:56px;
+  height:56px;
+  border-radius:14px;
+  background:rgba(255,255,255,.08);
+  border:1.5px solid rgba(255,255,255,.18);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  flex-shrink:0;
+}
+.brand-logo img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  display:block;
+}
+.brand-name{
+  font-size:15px;
+  font-weight:700;
+  color:rgba(255,255,255,.92);
+  letter-spacing:.02em;
+  text-align:left;
+}
+.brand-sub{
+  font-size:11px;
+  color:rgba(255,255,255,.35);
+  margin-top:2px;
+}
+
+/* Success Icon */
+.success-icon{
+  margin:16px 0 8px;
+}
+.check-circle{
+  width:88px;
+  height:88px;
+  margin:0 auto;
+  background:linear-gradient(135deg,var(--pink) 0%,var(--pink-d) 100%);
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow:0 8px 24px rgba(233,30,140,.3);
+}
+.check-circle svg{
+  width:48px;
+  height:48px;
+  fill:none;
+  stroke:#fff;
+  stroke-width:3;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+
+/* Content */
+.content{
+  padding:32px 40px 40px;
+  text-align:center;
+}
+h2{
+  font-family:'Sora',sans-serif;
+  font-size:28px;
+  font-weight:800;
+  color:var(--navy);
+  letter-spacing:-.02em;
+  margin-bottom:12px;
+}
+.message{
+  font-size:15px;
+  color:var(--muted);
+  line-height:1.6;
+  margin-bottom:28px;
+}
+
+/* WhatsApp Box */
+.whatsapp-box{
+  background: #DCF8C6;
+  border:2px solid #25D366;
+  border-radius:var(--r-sm);
+  padding:16px 20px;
+  margin-bottom:24px;
+  text-align:center;
+}
+.whatsapp-icon{
+  font-size:48px;
+  margin-bottom:10px;
+}
+.whatsapp-title{
+  font-size:18px;
+  font-weight:800;
+  color:#075E54;
+  margin-bottom:8px;
+}
+.whatsapp-text{
+  font-size:13px;
+  color:#075E54;
+  margin-bottom:12px;
+}
+.whatsapp-number{
+  font-size:20px;
+  font-weight:800;
+  color:#25D366;
+  background:white;
+  display:inline-block;
+  padding:8px 16px;
+  border-radius:50px;
+  margin-top:8px;
+}
+
+/* Info Box */
+.info-box{
+  background:var(--fog);
+  border:1.5px solid var(--border);
+  border-radius:var(--r-sm);
+  padding:16px 20px;
+  margin-bottom:24px;
+  text-align:left;
+}
+.info-item{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:8px 0;
+}
+.info-item:first-child{
+  padding-top:0;
+}
+.info-item:last-child{
+  padding-bottom:0;
+}
+.info-icon{
+  width:36px;
+  height:36px;
+  background:var(--pink-lt);
+  border-radius:10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:18px;
+  flex-shrink:0;
+}
+.info-text{
+  flex:1;
+}
+.info-label{
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--muted);
+  margin-bottom:2px;
+}
+.info-value{
+  font-size:16px;
+  font-weight:700;
+  color:var(--navy);
+}
+.phone-number{
+  font-size:18px;
+  font-weight:800;
+  color:var(--pink);
+}
+
+/* Divider */
+.divider{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin:24px 0;
+}
+.divider-line{
+  flex:1;
+  height:1px;
+  background:var(--border);
+}
+.divider-text{
+  font-size:11px;
+  font-weight:600;
+  color:var(--muted);
+  text-transform:uppercase;
+  letter-spacing:.1em;
+}
+
+/* Steps */
+.steps-mini{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:28px;
+}
+.step-mini{
+  flex:1;
+  text-align:center;
+}
+.step-num-mini{
+  width:32px;
+  height:32px;
+  margin:0 auto 8px;
+  background:var(--pink-lt);
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:12px;
+  font-weight:800;
+  color:var(--pink);
+}
+.step-text-mini{
+  font-size:10px;
+  font-weight:600;
+  color:var(--muted);
+  text-transform:uppercase;
+  letter-spacing:.05em;
+}
+
+/* Button */
+.btn-home{
+  width:100%;
+  padding:14px;
+  background:linear-gradient(135deg,var(--pink) 0%,var(--pink-d) 100%);
+  color:#fff;
+  border:none;
+  border-radius:var(--r-sm);
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:15px;
+  font-weight:700;
+  cursor:pointer;
+  box-shadow:0 6px 20px rgba(233,30,140,.28);
+  transition:opacity .15s,transform .12s;
+  text-decoration:none;
+  display:inline-block;
+  text-align:center;
+}
+.btn-home:hover{
+  opacity:.9;
+  transform:translateY(-1px);
+}
+.btn-home:active{
+  transform:translateY(0);
+}
+
+/* Footer */
+.footer{
+  background:var(--fog);
+  border-top:1px solid var(--border);
+  padding:14px 24px;
+  text-align:center;
+}
+.footer-text{
+  font-size:11px;
+  color:var(--muted);
+}
+
+/* Auto-return message */
+.auto-return-msg{
+  margin-top:20px;
+  padding:12px;
+  background:#e8f5e9;
+  border-radius:10px;
+  font-size:13px;
+  color:#2e7d32;
+  animation:pulse 1.5s ease-in-out;
+  display:none;
+}
+
+@keyframes pulse{
+  0%,100%{opacity:1}
+  50%{opacity:0.7}
+}
+
+@media(max-width:520px){
+  .content{
+    padding:24px 20px 32px;
+  }
+  .header{
+    padding:20px 24px;
+  }
+  .info-value{
+    font-size:14px;
+  }
+  .phone-number{
+    font-size:16px;
+  }
+  .whatsapp-number{
+    font-size:16px;
+  }
+  h2{
+    font-size:24px;
+  }
+}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="header">
+    <div class="brand">
+      <div class="brand-logo">
+        <img src="{% static 'logo.png' %}" alt="RoyalHope Logo"/>
+      </div>
+      <div>
+        <div class="brand-name">RoyalHope Home Based Care</div>
+        <div class="brand-sub">Professional Care at the Comfort of Home</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="success-icon">
+      <div class="check-circle">
+        <svg viewBox="0 0 24 24">
+          <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>
+      </div>
+    </div>
+
+    <h2>Thank You, {{ lead.full_name|default:"Valued Patient" }}!</h2>
+    <p class="message">Your consultation has been received. Dr. Solomon will contact you via <strong>WhatsApp within 20 minutes</strong>.</p>
+
+    <!-- WhatsApp Box -->
+    <div class="whatsapp-box">
+      <div class="whatsapp-icon">📱💬</div>
+      <div class="whatsapp-title">WhatsApp Confirmation</div>
+      <div class="whatsapp-text">You will receive a WhatsApp message from:</div>
+      <div class="whatsapp-number">+254 740 940 395</div>
+    </div>
+
+    <div class="info-box">
+      <div class="info-item">
+        <div class="info-icon">📞</div>
+        <div class="info-text">
+          <div class="info-label">Emergency Contact</div>
+          <div class="phone-number">+254 740 940 395</div>
+        </div>
+      </div>
+      <div class="info-item">
+        <div class="info-icon">🕐</div>
+        <div class="info-text">
+          <div class="info-label">Response Time</div>
+          <div class="info-value">Within 20 minutes</div>
+        </div>
+      </div>
+      <div class="info-item">
+        <div class="info-icon">📍</div>
+        <div class="info-text">
+          <div class="info-label">Service Area</div>
+          <div class="info-value">Nairobi &amp; Kiambu County</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider">
+      <div class="divider-line"></div>
+      <div class="divider-text">What's Next?</div>
+      <div class="divider-line"></div>
+    </div>
+
+    <div class="steps-mini">
+      <div class="step-mini">
+        <div class="step-num-mini">1</div>
+        <div class="step-text-mini">Live Screening</div>
+      </div>
+      <div class="step-mini">
+        <div class="step-num-mini">2</div>
+        <div class="step-text-mini">WhatsApp Chat</div>
+      </div>
+      <div class="step-mini">
+        <div class="step-num-mini">3</div>
+        <div class="step-text-mini">Results &amp; Guidance</div>
+      </div>
+    </div>
+
+    <a href="/" class="btn-home">← Back to Home</a>
+    
+    <!-- Auto-return message -->
+    <div class="auto-return-msg" id="returnMsg"></div>
+  </div>
+
+  <div class="footer">
+    <div class="footer-text">
+      💙 Your health matters. We're here for you on WhatsApp.
+    </div>
+  </div>
+</div>
+
+<script>
+// Auto-open WhatsApp when page loads
+window.addEventListener('load', function() {
+    // Get patient name if available
+    const patientName = "{{ lead.full_name|default:'a patient' }}";
+    
+    // Pre-filled message from patient to Dr. Solomon
+    const message = `Hello Dr. Solomon, this is ${patientName}. I just completed my health screening. Please contact me on WhatsApp. Thank you!`;
+    const whatsappLink = `https://wa.me/254740940395?text=${encodeURIComponent(message)}`;
+    
+    // Open WhatsApp in new tab after 1 second delay
+    setTimeout(function() {
+        window.open(whatsappLink, '_blank');
+    }, 1000);
+    
+    // Show return message
+    const returnMsg = document.getElementById('returnMsg');
+    returnMsg.style.display = 'block';
+    
+    // Timer countdown
+    let seconds = 10;
+    returnMsg.innerHTML = `📱 Opening WhatsApp... Return to this tab in ${seconds} seconds`;
+    
+    const timer = setInterval(function() {
+        seconds--;
+        if(seconds > 0) {
+            returnMsg.innerHTML = `📱 WhatsApp opened! Return to this browser tab in ${seconds} seconds...`;
+        } else {
+            clearInterval(timer);
+            returnMsg.innerHTML = `✅ Ready! Dr. Solomon will respond within 20 minutes. Keep your WhatsApp open.`;
+        }
+    }, 1000);
+    
+    // Focus back to this tab after 3 seconds
+    setTimeout(function() {
+        window.focus();
+    }, 3000);
+});
+</script>
+</body>
+</html>

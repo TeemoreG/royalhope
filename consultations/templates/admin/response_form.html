@@ -1,0 +1,40 @@
+{% extends "admin/base_site.html" %}
+
+{% block content %}
+<div style="max-width:800px;margin:20px auto;">
+    <h1>Respond to Consultation #{{ consultation.id }}</h1>
+    
+    <div style="background:#f7f9fd;padding:20px;border-radius:10px;margin-bottom:20px;">
+        <h3>Patient: {{ consultation.lead.name }}</h3>
+        <p><strong>Phone:</strong> {{ consultation.lead.phone }}</p>
+        <p><strong>Email:</strong> {{ consultation.lead.email|default:"Not provided" }}</p>
+        <p><strong>Symptoms:</strong> {{ consultation.symptoms }}</p>
+        <p><strong>Duration:</strong> {{ consultation.duration }}</p>
+        <p><strong>Conditions:</strong> {{ consultation.conditions|default:"None" }}</p>
+    </div>
+    
+    <form method="POST">
+        {% csrf_token %}
+        
+        <div style="margin-bottom:20px;">
+            <label style="font-weight:bold;display:block;margin-bottom:8px;">Doctor's Response:</label>
+            <textarea name="response_text" rows="8" style="width:100%;padding:10px;border:1px solid #ddd;border-radius:5px;" placeholder="Write your medical response here..."></textarea>
+        </div>
+        
+        <div style="margin-bottom:20px;">
+            <label>
+                <input type="checkbox" name="send_email" checked> Send response via Email
+            </label>
+        </div>
+        
+        <div style="margin-bottom:20px;">
+            <label>
+                <input type="checkbox" name="send_whatsapp" checked> Send response via WhatsApp
+            </label>
+        </div>
+        
+        <button type="submit" style="background:#e91e8c;color:white;padding:10px 20px;border:none;border-radius:5px;cursor:pointer;">Send Response →</button>
+        <a href="/admin/consultations/consultation/" style="margin-left:10px;color:#666;">Cancel</a>
+    </form>
+</div>
+{% endblock %}
