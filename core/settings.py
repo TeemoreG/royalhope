@@ -8,9 +8,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-&4dibobs2o^$8ipkt=_t)rl(%!*_^bw!23!b08h=h(-k8edor@'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+# Production hosts
+ALLOWED_HOSTS = ['royalhope.onrender.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -84,8 +85,9 @@ TIME_ZONE = 'Africa/Nairobi'  # Changed to Kenya time
 USE_I18N = True
 USE_TZ = True
 
-# Static files
+# Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
