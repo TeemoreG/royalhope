@@ -96,10 +96,10 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage' 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # ========== ROYAL HOPE CONTACT CONFIGURATION ==========
-ROYAL_HOPE_PHONE = '+254740940395'
+ROYAL_HOPE_PHONE = '+254791597351'
 
 # Email configuration - DISABLED (using dummy backend)
 EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
 EMAIL_HOST_USER = 'timblax0@gmail.com'
-DEFAULT_FROM_EMAIL = 'RoyalHope Care <noreply@royalhope.co.ke>'
+DEFAULT_FROM_EMAIL = 'RoyalHope Care <info@royalhope.co.ke>'
 ADMIN_EMAILS = ['timblax0@gmail.com']
