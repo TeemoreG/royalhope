@@ -6,11 +6,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Health Screening Form · RoyalHope Home Based Care</title>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Sora:wght@700;800&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 <style>
 :root{
   --pink:#e91e8c;--pink-d:#c0166f;--pink-lt:#fce4f3;--pink-mid:#f472b6;
   --navy:#0d2251;--blue:#1a56a0;--sky:#3b82f6;--teal:#0ea5e9;
   --fog:#f7f9fd;--white:#fff;--border:#dde5f5;--muted:#6b7fa3;--ink:#0f1b30;
+  --whatsapp:#25D366;--whatsapp-dark:#128C7E;
   --r:12px;--r-sm:9px;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -26,30 +28,42 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--fog);min-height
 .left::after{content:'';position:absolute;bottom:-30px;right:-30px;width:200px;height:200px;
   border-radius:50%;border:1px solid rgba(59,130,246,.09);pointer-events:none}
 .glow{position:absolute;bottom:40px;right:-60px;width:280px;height:280px;border-radius:50%;
-  background:radial-gradient(circle,rgba(233,30,140,.2) 0%,transparent 65%);pointer-events:none}
+  background:radial-gradient(circle,rgba(233,30,140,.2) 0%,transparent 65%);pointer-events:none;
+  animation:pulse 4s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:0.3}50%{opacity:0.6}}
 
 /* Brand */
-.brand{display:flex;align-items:center;gap:11px;margin-bottom:44px}
+.brand{display:flex;align-items:center;gap:11px;margin-bottom:44px;animation:slideDown 0.5s ease}
+@keyframes slideDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
 .brand-logo{
   width:48px;height:48px;border-radius:11px;
   background:rgba(255,255,255,.08);
   border:1.5px solid rgba(255,255,255,.16);
   display:flex;align-items:center;justify-content:center;
   overflow:hidden;flex-shrink:0;
+  transition:transform 0.3s;
 }
+.brand-logo:hover{transform:scale(1.05)}
 .brand-logo img{width:100%;height:100%;object-fit:contain;display:block}
 .brand-name{font-size:13.5px;font-weight:700;color:rgba(255,255,255,.92);letter-spacing:.02em}
 .brand-sub{font-size:11px;color:rgba(255,255,255,.35);margin-top:2px}
 
 /* Steps */
 .steps{display:flex;flex-direction:column;gap:0;flex:1}
-.step-item{display:flex;gap:15px;padding-bottom:26px;position:relative}
+.step-item{display:flex;gap:15px;padding-bottom:26px;position:relative;animation:fadeInLeft 0.5s ease;
+  animation-fill-mode:both}
+.step-item:nth-child(1){animation-delay:0.1s}
+.step-item:nth-child(2){animation-delay:0.2s}
+.step-item:nth-child(3){animation-delay:0.3s}
+@keyframes fadeInLeft{from{opacity:0;transform:translateX(-20px)}to{opacity:1;transform:translateX(0)}}
 .step-item:not(:last-child)::before{content:'';position:absolute;left:14px;top:30px;
   width:1px;height:calc(100% - 14px);background:rgba(255,255,255,.08)}
 .step-num{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;
-  font-size:11px;font-weight:700;flex-shrink:0}
+  font-size:11px;font-weight:700;flex-shrink:0;transition:all 0.3s}
 .step-num.done{background:var(--pink);color:#fff}
-.step-num.active{background:rgba(255,255,255,.1);border:2px solid var(--pink);color:#fff}
+.step-num.active{background:rgba(255,255,255,.1);border:2px solid var(--pink);color:#fff;
+  animation:ripple 1.5s infinite}
+@keyframes ripple{0%{box-shadow:0 0 0 0 rgba(233,30,140,0.4)}100%{box-shadow:0 0 0 10px rgba(233,30,140,0)}}
 .step-num.todo{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.25)}
 .step-title{font-size:13px;font-weight:600;color:rgba(255,255,255,.7);margin-top:4px}
 .step-title.active{color:#fff}
@@ -59,32 +73,233 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--fog);min-height
 /* Info cards */
 .info-cards{margin-top:36px;display:flex;flex-direction:column;gap:9px}
 .info-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);
-  border-radius:var(--r);padding:11px 13px;display:flex;align-items:center;gap:11px}
+  border-radius:var(--r);padding:11px 13px;display:flex;align-items:center;gap:11px;
+  transition:all 0.3s;animation:fadeInUp 0.5s ease;animation-fill-mode:both}
+.info-card:nth-child(1){animation-delay:0.1s}
+.info-card:nth-child(2){animation-delay:0.2s}
+.info-card:nth-child(3){animation-delay:0.3s}
+.info-card:nth-child(4){animation-delay:0.4s}
+.info-card:nth-child(5){animation-delay:0.5s}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.info-card:hover{background:rgba(255,255,255,.1);transform:translateX(5px)}
 .info-icon{width:32px;height:32px;border-radius:8px;background:rgba(233,30,140,.18);
   border:1px solid rgba(233,30,140,.25);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
 .info-text{font-size:12px;color:rgba(255,255,255,.5);line-height:1.4}
 .info-text strong{display:block;color:rgba(255,255,255,.78);font-weight:600;font-size:12px;margin-bottom:1px}
 
-.left-footer{margin-top:28px;font-size:10px;color:rgba(255,255,255,.16)}
+.left-footer{margin-top:28px;font-size:10px;color:rgba(255,255,255,.16);text-align:center}
 
 /* RIGHT PANEL */
 .right{background:#fff;padding:44px 48px;display:flex;flex-direction:column}
 
-.form-top{margin-bottom:28px}
+.form-top{margin-bottom:28px;animation:slideDown 0.5s ease}
 .form-tag{display:inline-flex;align-items:center;gap:6px;
   background:var(--pink-lt);color:var(--pink);border:1px solid rgba(233,30,140,.2);
   font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
   padding:5px 12px;border-radius:100px;margin-bottom:14px}
-.form-tag .dot{width:6px;height:6px;border-radius:50%;background:var(--pink)}
+.form-tag .dot{width:6px;height:6px;border-radius:50%;background:var(--pink);
+  animation:blink 1.5s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
 .form-top h2{font-family:'Sora',sans-serif;font-size:24px;font-weight:800;
   color:var(--navy);letter-spacing:-.02em;line-height:1.15;margin-bottom:7px}
-.form-top p{font-size:14px;color:var(--muted)}
+.form-top p{font-size:14px;color:var(--muted);line-height:1.5}
 
 .prog-track{height:4px;background:var(--fog);border-radius:4px;margin-bottom:28px;overflow:hidden}
-.prog-fill{height:100%;width:100%;background:linear-gradient(90deg,var(--pink),var(--sky));border-radius:4px}
+.prog-fill{height:100%;width:100%;background:linear-gradient(90deg,var(--pink),var(--sky));
+  border-radius:4px;animation:fillProgress 1s ease-out}
+@keyframes fillProgress{from{width:0%}to{width:100%}}
+
+/* DID YOU KNOW SECTION */
+.did-you-know{
+  background:linear-gradient(135deg,#1a56a0 0%,#0d2251 100%);
+  border-radius:var(--r-sm);
+  padding:24px 20px;
+  margin-bottom:24px;
+  animation:slideInRight 0.6s ease;
+  position:relative;
+  overflow:hidden;
+  box-shadow:0 8px 20px rgba(0,0,0,.15);
+}
+.did-you-know::before{
+  content:'?';
+  position:absolute;
+  bottom:-30px;
+  right:-20px;
+  font-size:120px;
+  font-weight:800;
+  opacity:0.08;
+  color:#fff;
+  font-family:'Sora',sans-serif;
+}
+@keyframes slideInRight{from{opacity:0;transform:translateX(30px)}to{opacity:1;transform:translateX(0)}}
+.did-you-know h3{
+  font-size:20px;
+  font-weight:800;
+  color:#fff;
+  margin-bottom:16px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.did-you-know h3 i{
+  font-size:28px;
+  color:var(--pink-mid);
+}
+.did-you-know .stat-number{
+  font-size:42px;
+  font-weight:800;
+  color:var(--pink-mid);
+  display:inline-block;
+  margin-right:8px;
+  line-height:1;
+}
+.stat-text{
+  font-size:16px;
+  font-weight:600;
+  color:#fff;
+  margin-bottom:12px;
+  line-height:1.4;
+}
+.did-you-know p{
+  font-size:13px;
+  color:rgba(255,255,255,.75);
+  line-height:1.6;
+  margin-top:12px;
+}
+.did-you-know .highlight{
+  color:var(--pink-mid);
+  font-weight:700;
+}
+.did-you-know .confidential-badge{
+  background:rgba(255,255,255,.12);
+  border-radius:100px;
+  padding:8px 14px;
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  margin-top:16px;
+  font-size:12px;
+  font-weight:600;
+  color:#fff;
+  border:1px solid rgba(255,255,255,.2);
+}
+.confidential-badge i{
+  color:var(--pink-mid);
+  font-size:14px;
+}
+
+/* DR. SOLOMON'S PROFILE SECTION */
+.doctor-profile{
+  background:linear-gradient(135deg, #fce4f3 0%, #fff 100%);
+  border-radius:12px;
+  padding:20px;
+  margin-bottom:24px;
+  border-left:4px solid #e91e8c;
+  animation:slideInRight 0.6s ease 0.04s both;
+}
+.doctor-profile .profile-header{
+  display:flex;
+  align-items:center;
+  gap:15px;
+  flex-wrap:wrap;
+}
+.doctor-avatar{
+  width:60px;
+  height:60px;
+  background:linear-gradient(135deg, #e91e8c, #c0166f);
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.doctor-avatar i{
+  font-size:30px;
+  color:#fff;
+}
+.doctor-info h4{
+  color:#0d2251;
+  font-size:16px;
+  font-weight:800;
+  margin-bottom:4px;
+}
+.doctor-info h4 i{
+  color:#e91e8c;
+  font-size:14px;
+  margin-right:4px;
+}
+.doctor-info p{
+  color:#1a56a0;
+  font-size:12px;
+  font-weight:600;
+  margin-bottom:8px;
+}
+.doctor-bio{
+  margin-top:12px;
+}
+.doctor-bio p{
+  font-size:13px;
+  color:#4a5568;
+  line-height:1.6;
+  margin-bottom:8px;
+}
+.doctor-badges{
+  display:flex;
+  gap:12px;
+  margin-top:12px;
+  flex-wrap:wrap;
+}
+.doctor-badge{
+  background:rgba(233,30,140,.1);
+  padding:4px 10px;
+  border-radius:20px;
+  font-size:11px;
+  color:#e91e8c;
+}
+.doctor-badge i{
+  margin-right:4px;
+}
+
+/* WhatsApp Banner */
+.whatsapp-banner{
+  background:linear-gradient(135deg,#DCF8C6 0%,#fff 100%);
+  border-left:4px solid var(--whatsapp);
+  border-radius:var(--r-sm);
+  padding:16px 20px;
+  margin-bottom:24px;
+  animation:slideInRight 0.6s ease 0.08s both;
+  position:relative;
+  overflow:hidden;
+}
+.whatsapp-banner::before{
+  content:'';position:absolute;top:-50%;right:-20px;width:100px;height:100px;
+  background:var(--whatsapp);opacity:0.08;border-radius:50%;
+}
+.whatsapp-banner h4{font-size:14px;font-weight:800;color:#075E54;margin-bottom:8px;
+  display:flex;align-items:center;gap:8px}
+.whatsapp-banner p{font-size:12.5px;color:var(--muted);line-height:1.6;margin-bottom:6px}
+.whatsapp-banner p:last-child{margin-bottom:0}
+.whatsapp-highlight{color:var(--whatsapp);font-weight:700}
+
+/* Health Tips Section */
+.health-tips{background:var(--fog);border-radius:var(--r-sm);padding:16px;
+  margin-bottom:24px;border:1px solid var(--border);animation:slideInRight 0.6s ease 0.16s both}
+.health-tips h4{font-size:12px;font-weight:800;color:var(--navy);margin-bottom:12px;
+  display:flex;align-items:center;gap:8px;text-transform:uppercase;letter-spacing:.08em}
+.tip-list{display:flex;flex-direction:column;gap:10px}
+.tip-item{display:flex;align-items:center;gap:10px;font-size:12px;color:var(--muted);
+  padding:6px 0;border-bottom:1px dashed rgba(0,0,0,.05);transition:all 0.3s}
+.tip-item:last-child{border-bottom:none}
+.tip-item:hover{transform:translateX(5px);color:var(--navy)}
+.tip-icon{font-size:14px;min-width:24px}
+.tip-text{flex:1}
+.tip-highlight{font-weight:700;color:var(--pink)}
 
 /* FORM */
-.f{display:flex;flex-direction:column;gap:5px;margin-bottom:16px}
+.f{display:flex;flex-direction:column;gap:5px;margin-bottom:16px;
+  animation:fadeInUp 0.5s ease;animation-fill-mode:both}
+.f:nth-child(1){animation-delay:0.1s}
+.f:nth-child(2){animation-delay:0.2s}
+.f:nth-child(3){animation-delay:0.3s}
 .f label{font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--navy)}
 .f label .req{color:var(--pink);margin-left:1px}
 .f label .opt{font-weight:400;color:var(--muted);text-transform:none;letter-spacing:0;font-size:10px;margin-left:3px}
@@ -92,15 +307,18 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--fog);min-height
   padding:12px 14px;border:1.5px solid var(--border);border-radius:var(--r-sm);
   font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:500;
   color:var(--ink);background:var(--fog);outline:none;-webkit-appearance:none;
-  transition:border-color .15s,background .15s,box-shadow .15s;width:100%}
+  transition:all 0.3s;width:100%}
 .f input::placeholder,.f textarea::placeholder{color:#b8c5de;font-weight:400}
 .f input:focus,.f select:focus,.f textarea:focus{
-  border-color:var(--pink);background:#fff;box-shadow:0 0 0 3px rgba(233,30,140,.1)}
+  border-color:var(--pink);background:#fff;box-shadow:0 0 0 3px rgba(233,30,140,.1);
+  transform:scale(1.01)}
 .f select{cursor:pointer}
 .f textarea{resize:none;height:82px}
 .row2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 
-.err{display:none;font-size:11.5px;color:#dc2626;font-weight:600;margin-top:3px}
+.err{display:none;font-size:11.5px;color:#dc2626;font-weight:600;margin-top:3px;
+  animation:shake 0.3s ease}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
 
 /* CHIPS */
 .chip-wrap{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:4px}
@@ -109,26 +327,39 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--fog);min-height
 .chip label{display:inline-flex;align-items:center;gap:5px;
   border:1.5px solid var(--border);border-radius:100px;padding:7px 13px;
   font-size:12.5px;font-weight:600;color:var(--muted);cursor:pointer;
-  background:var(--fog);transition:all .15s;white-space:nowrap}
-.chip input:checked+label{border-color:var(--pink);background:var(--pink-lt);color:var(--navy)}
-.chip label:hover{border-color:var(--pink-mid)}
+  background:var(--fog);transition:all 0.3s;white-space:nowrap}
+.chip input:checked+label{border-color:var(--pink);background:var(--pink-lt);color:var(--navy);
+  transform:scale(1.02);box-shadow:0 2px 8px rgba(233,30,140,.2)}
+.chip label:hover{border-color:var(--pink-mid);transform:translateY(-2px)}
 .chip label::before{content:'';width:8px;height:8px;border-radius:50%;
-  border:1.5px solid var(--border);flex-shrink:0;transition:all .15s}
-.chip input:checked+label::before{background:var(--pink);border-color:var(--pink)}
+  border:1.5px solid var(--border);flex-shrink:0;transition:all 0.3s}
+.chip input:checked+label::before{background:var(--pink);border-color:var(--pink);
+  transform:scale(1.1)}
 
-/* Buttons */
+/* WhatsApp Button */
 .btn-row{margin-top:6px;display:flex;flex-direction:column;gap:10px}
-.btn-main{width:100%;padding:14px;
-  background:linear-gradient(135deg,var(--pink) 0%,var(--pink-d) 100%);
+.btn-main{
+  width:100%;padding:14px;
+  background:linear-gradient(135deg,var(--whatsapp) 0%,var(--whatsapp-dark) 100%);
   color:#fff;border:none;border-radius:var(--r-sm);
   font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:700;cursor:pointer;
-  box-shadow:0 6px 20px rgba(233,30,140,.28);transition:opacity .15s,transform .12s}
-.btn-main:hover{opacity:.9;transform:translateY(-1px)}
+  box-shadow:0 6px 20px rgba(37,211,102,.3);transition:all 0.3s;
+  position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;gap:10px;
+}
+.btn-main i{font-size:18px;transition:transform 0.3s;}
+.btn-main::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.2),transparent);
+  transition:left 0.5s}
+.btn-main:hover::before{left:100%}
+.btn-main:hover{opacity:.95;transform:translateY(-2px);box-shadow:0 10px 30px rgba(37,211,102,.4)}
+.btn-main:hover i{transform:scale(1.1)}
 .btn-main:active{transform:translateY(0)}
 
 .secure-note{display:flex;align-items:center;justify-content:center;gap:6px;
-  font-size:11.5px;color:var(--muted);margin-top:10px}
-.secure-note svg{width:12px;height:12px;fill:var(--muted)}
+  font-size:11.5px;color:var(--muted);margin-top:10px;
+  animation:fadeInUp 0.5s ease 0.3s both}
+.secure-note i{font-size:12px;color:var(--muted);transition:color 0.3s}
+.secure-note:hover i{color:var(--whatsapp)}
 
 /* RESPONSIVE */
 @media(max-width:880px){
@@ -136,8 +367,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--fog);min-height
   .left{padding:24px 20px 28px}
   .steps{flex-direction:row;overflow-x:auto;gap:0}
   .step-item{flex-direction:column;align-items:center;text-align:center;flex:1;padding-bottom:0;min-width:70px}
-  .step-item:not(:last-child)::before{left:50%;top:14px;width:calc(100% - 14px);height:1px;transform:translateX(14px)}
-  .step-desc{display:none}
+  .step-item:not(:last-child)::before{display:none}
   .info-cards{flex-direction:row;flex-wrap:wrap}
   .info-card{flex:1;min-width:130px}
   .right{padding:28px 20px 36px}
@@ -146,6 +376,8 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--fog);min-height
   .row2{grid-template-columns:1fr}
   .info-cards{display:none}
   .right{padding:24px 14px 32px}
+  .did-you-know .stat-number{font-size:32px}
+  .stat-text{font-size:14px}
 }
 </style>
 </head>
@@ -168,7 +400,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--fog);min-height
 
     <div class="steps">
       <div class="step-item">
-        <div class="step-num done">✓</div>
+        <div class="step-num done"><i class="fas fa-check" style="font-size:11px;"></i></div>
         <div>
           <div class="step-title">Personal Info</div>
           <div class="step-desc">Name &amp; contact details</div>
@@ -192,28 +424,28 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--fog);min-height
 
     <div class="info-cards">
       <div class="info-card">
-        <div class="info-icon">🔒</div>
+        <div class="info-icon"><i class="fas fa-lock"></i></div>
         <div class="info-text"><strong>Confidential</strong>Encrypted &amp; never shared</div>
       </div>
       <div class="info-card">
-        <div class="info-icon">🏥</div>
+        <div class="info-icon"><i class="fas fa-hospital-alt"></i></div>
         <div class="info-text"><strong>18+ Hospital Partners</strong>Leading hospitals across Kenya</div>
       </div>
       <div class="info-card">
-        <div class="info-icon">⏰</div>
+        <div class="info-icon"><i class="fas fa-clock"></i></div>
         <div class="info-text"><strong>48-Hour Campaign</strong>Limited slots — register now</div>
       </div>
       <div class="info-card">
-        <div class="info-icon">🏠</div>
+        <div class="info-icon"><i class="fas fa-home"></i></div>
         <div class="info-text"><strong>Home Visits Available</strong>Nairobi &amp; Kiambu County</div>
       </div>
       <div class="info-card">
-        <div class="info-icon">📱</div>
+        <div class="info-icon"><i class="fab fa-whatsapp"></i></div>
         <div class="info-text"><strong>WhatsApp Only</strong>Direct message to Dr. Solomon</div>
       </div>
     </div>
 
-    <div class="left-footer">© 2026 RoyalHope Home Based Care · Campaign 2026 · Confidential<br/>Solomon — 0740 940 395</div>
+    <div class="left-footer">© 2026 RoyalHope Home Based Care · Campaign 2026 · Confidential<br/>Dr. Solomon — +254 791 597 351</div>
   </div>
 
   <!-- RIGHT PANEL -->
@@ -225,6 +457,75 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--fog);min-height
     </div>
 
     <div class="prog-track"><div class="prog-fill"></div></div>
+
+    <!-- DID YOU KNOW SECTION -->
+    <div class="did-you-know">
+      <h3><i class="fas fa-lightbulb"></i> Did You Know?</h3>
+      <div>
+        <span class="stat-number">67%</span>
+        <span class="stat-text">of premature deaths are linked to conditions that could have been detected early through regular health screenings.</span>
+      </div>
+      <p>Every year, <span class="highlight">over 500,000 Kenyans</span> skip or delay necessary health consultations due to lack of awareness, cost concerns, or simply not knowing where to start. This leads to advanced disease progression, higher treatment costs, and in many cases — preventable complications.</p>
+      <p style="margin-top:12px;">Early detection saves lives. Don't become a statistic. A simple consultation today could prevent a serious health crisis tomorrow.</p>
+      <div class="confidential-badge">
+        <i class="fas fa-shield-alt"></i> 100% Confidential · No Data Sharing · No Unauthorized Use
+      </div>
+    </div>
+
+    <!-- DR. SOLOMON'S PROFILE SECTION -->
+    <div class="doctor-profile">
+      <div class="profile-header">
+        <div class="doctor-avatar">
+          <i class="fas fa-user-md"></i>
+        </div>
+        <div class="doctor-info">
+          <h4><i class="fas fa-check-circle"></i> Dr. Solomon Wanjumbi</h4>
+          <p><i class="fas fa-certificate"></i> Verified Medical Practitioner | MBChB (UoN) | MMED (Internal Medicine)</p>
+        </div>
+      </div>
+      <div class="doctor-bio">
+        <p>With <strong>over 15 years of experience</strong> in internal medicine and community health, Dr. Solomon has successfully guided <strong>10,000+ patients</strong> through early detection and preventive care. He is registered with the <strong>Kenya Medical Practitioners and Dentists Council (KMPDC)</strong> and has worked with leading hospitals including Kenyatta National Hospital and Aga Khan University Hospital.</p>
+      </div>
+      <div class="doctor-badges">
+        <span class="doctor-badge"><i class="fas fa-star"></i> 15+ Years Experience</span>
+        <span class="doctor-badge"><i class="fas fa-users"></i> 10,000+ Patients Treated</span>
+        <span class="doctor-badge"><i class="fas fa-check-circle"></i> KMPDC Certified</span>
+      </div>
+    </div>
+
+    <!-- WhatsApp Banner -->
+    <div class="whatsapp-banner">
+      <h4><i class="fab fa-whatsapp" style="color:#25D366; font-size:20px;"></i> Direct WhatsApp Consultation</h4>
+      <p>After submitting, you'll be redirected to <span class="whatsapp-highlight">WhatsApp</span> where Dr. Solomon will personally review your symptoms and provide professional guidance — <strong>within 20 minutes</strong>.</p>
+      <p style="font-size:11px; margin-top:8px;"><i class="fas fa-check-circle" style="color:#25D366;"></i> Free consultation — <i class="fas fa-check-circle" style="color:#25D366;"></i> Professional advice — <i class="fas fa-check-circle" style="color:#25D366;"></i> Confidential</p>
+    </div>
+
+    <!-- Health Tips Section -->
+    <div class="health-tips">
+      <h4><i class="fas fa-heartbeat"></i> Quick Health Tips</h4>
+      <div class="tip-list">
+        <div class="tip-item">
+          <i class="fas fa-tint tip-icon"></i>
+          <span class="tip-text">Stay hydrated — drink <span class="tip-highlight">8 glasses</span> of water daily</span>
+        </div>
+        <div class="tip-item">
+          <i class="fas fa-bed tip-icon"></i>
+          <span class="tip-text">Get <span class="tip-highlight">7-8 hours</span> of quality sleep each night</span>
+        </div>
+        <div class="tip-item">
+          <i class="fas fa-apple-alt tip-icon"></i>
+          <span class="tip-text">Eat balanced meals with <span class="tip-highlight">fruits & vegetables</span></span>
+        </div>
+        <div class="tip-item">
+          <i class="fas fa-running tip-icon"></i>
+          <span class="tip-text">Stay active — <span class="tip-highlight">30 minutes</span> of exercise daily</span>
+        </div>
+        <div class="tip-item">
+          <i class="fas fa-stethoscope tip-icon"></i>
+          <span class="tip-text">Regular check-ups help <span class="tip-highlight">prevent complications</span></span>
+        </div>
+      </div>
+    </div>
 
     <form method="POST" id="screeningForm" action="{% url 'screening' %}" novalidate>
       {% csrf_token %}
@@ -262,24 +563,26 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--fog);min-height
       <div class="f">
         <label>Pre-existing conditions <span class="opt">select all that apply</span></label>
         <div class="chip-wrap">
-          <div class="chip"><input type="checkbox" name="conditions" id="dc1" value="Diabetes"><label for="dc1">Diabetes</label></div>
-          <div class="chip"><input type="checkbox" name="conditions" id="dc2" value="Hypertension"><label for="dc2">Hypertension</label></div>
-          <div class="chip"><input type="checkbox" name="conditions" id="dc3" value="Heart Disease"><label for="dc3">Heart Disease</label></div>
-          <div class="chip"><input type="checkbox" name="conditions" id="dc4" value="Kidney Disease"><label for="dc4">Kidney Disease</label></div>
-          <div class="chip"><input type="checkbox" name="conditions" id="dc5" value="Asthma"><label for="dc5">Asthma</label></div>
-          <div class="chip"><input type="checkbox" name="conditions" id="dc6" value="Arthritis"><label for="dc6">Arthritis</label></div>
-          <div class="chip"><input type="checkbox" name="conditions" id="dc7" value="Cancer"><label for="dc7">Cancer</label></div>
-          <div class="chip"><input type="checkbox" name="conditions" id="dc8" value="Stroke"><label for="dc8">Stroke</label></div>
-          <div class="chip"><input type="checkbox" name="conditions" id="dc9" value="Dementia"><label for="dc9">Dementia</label></div>
-          <div class="chip"><input type="checkbox" name="conditions" id="dc10" value="None"><label for="dc10">None of the above</label></div>
+          <div class="chip"><input type="checkbox" name="conditions" id="dc1" value="Diabetes"><label for="dc1"><i class="fas fa-droplet"></i> Diabetes</label></div>
+          <div class="chip"><input type="checkbox" name="conditions" id="dc2" value="Hypertension"><label for="dc2"><i class="fas fa-heartbeat"></i> Hypertension</label></div>
+          <div class="chip"><input type="checkbox" name="conditions" id="dc3" value="Heart Disease"><label for="dc3"><i class="fas fa-heart"></i> Heart Disease</label></div>
+          <div class="chip"><input type="checkbox" name="conditions" id="dc4" value="Kidney Disease"><label for="dc4"><i class="fas fa-filter"></i> Kidney Disease</label></div>
+          <div class="chip"><input type="checkbox" name="conditions" id="dc5" value="Asthma"><label for="dc5"><i class="fas fa-lungs"></i> Asthma</label></div>
+          <div class="chip"><input type="checkbox" name="conditions" id="dc6" value="Arthritis"><label for="dc6"><i class="fas fa-bone"></i> Arthritis</label></div>
+          <div class="chip"><input type="checkbox" name="conditions" id="dc7" value="Cancer"><label for="dc7"><i class="fas fa-ribbon"></i> Cancer</label></div>
+          <div class="chip"><input type="checkbox" name="conditions" id="dc8" value="Stroke"><label for="dc8"><i class="fas fa-brain"></i> Stroke</label></div>
+          <div class="chip"><input type="checkbox" name="conditions" id="dc9" value="Dementia"><label for="dc9"><i class="fas fa-brain"></i> Dementia</label></div>
+          <div class="chip"><input type="checkbox" name="conditions" id="dc10" value="None"><label for="dc10"><i class="fas fa-times"></i> None of the above</label></div>
         </div>
         <input type="hidden" name="conditions_combined" id="conditions_combined">
       </div>
 
       <div class="btn-row">
-        <button type="submit" class="btn-main">📱 Send to WhatsApp →</button>
+        <button type="submit" class="btn-main">
+          <i class="fab fa-whatsapp"></i> Send to WhatsApp <i class="fas fa-arrow-right"></i>
+        </button>
         <div class="secure-note">
-          <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
+          <i class="fas fa-shield-alt"></i>
           Your information is encrypted. You'll go directly to WhatsApp.
         </div>
       </div>
